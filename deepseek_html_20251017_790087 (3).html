@@ -1,0 +1,2090 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kompletny System Treningowy Piłkarza</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary: #1a2a6c;
+            --secondary: #2a4a6c;
+            --accent: #4a6a8c;
+            --light: #f8f9fa;
+            --dark: #333;
+            --success: #28a745;
+            --warning: #ffc107;
+            --danger: #dc3545;
+        }
+        
+        body {
+            background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
+            color: var(--dark);
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+            position: relative;
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .subtitle {
+            font-size: 1.4rem;
+            opacity: 0.9;
+            margin-bottom: 10px;
+        }
+        
+        .tagline {
+            font-style: italic;
+            font-size: 1.1rem;
+            opacity: 0.8;
+        }
+        
+        .content {
+            padding: 30px;
+        }
+        
+        section {
+            margin-bottom: 40px;
+            padding: 25px;
+            border-radius: 10px;
+            background: var(--light);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+        
+        section:hover {
+            transform: translateY(-5px);
+        }
+        
+        h2 {
+            color: var(--primary);
+            border-bottom: 2px solid var(--secondary);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        h2::before {
+            content: '';
+            display: inline-block;
+            width: 10px;
+            height: 30px;
+            background: var(--secondary);
+            margin-right: 15px;
+            border-radius: 5px;
+        }
+        
+        h3 {
+            color: var(--secondary);
+            margin: 15px 0 10px;
+            font-size: 1.4rem;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        th {
+            background-color: var(--secondary);
+            color: white;
+            font-weight: 600;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        
+        tr:hover {
+            background-color: #e6f7ff;
+        }
+        
+        .highlight {
+            background-color: #e6f7ff;
+            padding: 15px;
+            border-left: 4px solid var(--secondary);
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border-top: 4px solid var(--secondary);
+            transition: transform 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .card h3 {
+            color: var(--primary);
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .card h3::before {
+            content: '•';
+            color: var(--secondary);
+            margin-right: 10px;
+            font-size: 1.5rem;
+        }
+        
+        ul, ol {
+            padding-left: 20px;
+            margin: 10px 0;
+        }
+        
+        li {
+            margin-bottom: 8px;
+            position: relative;
+        }
+        
+        li::before {
+            content: '›';
+            position: absolute;
+            left: -15px;
+            color: var(--accent);
+        }
+        
+        .quote {
+            font-style: italic;
+            background: #f0f8ff;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid var(--secondary);
+            text-align: center;
+        }
+        
+        .quote-author {
+            text-align: right;
+            margin-top: 10px;
+            font-weight: bold;
+            color: var(--secondary);
+        }
+        
+        .icon {
+            display: inline-block;
+            width: 30px;
+            text-align: center;
+            margin-right: 10px;
+        }
+        
+        .download-btn {
+            display: inline-block;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            padding: 12px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 20px 0;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        
+        .download-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: var(--primary);
+            color: white;
+            margin-top: 40px;
+        }
+        
+        .checklist {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .checklist-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .section-progress {
+            font-weight: bold;
+            color: var(--primary);
+            background: #e6f7ff;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+        }
+        
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+            padding: 8px;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        
+        .checklist-item:hover {
+            background: #f0f8ff;
+        }
+        
+        .checklist-item input {
+            margin-right: 12px;
+            transform: scale(1.2);
+            cursor: pointer;
+        }
+        
+        .time-slot {
+            font-weight: bold;
+            color: var(--primary);
+            min-width: 70px;
+            display: inline-block;
+        }
+        
+        .progress-bar {
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 4px;
+            margin: 15px 0;
+            overflow: hidden;
+        }
+        
+        .progress {
+            height: 100%;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            border-radius: 4px;
+            transition: width 0.5s;
+        }
+        
+        .badge {
+            display: inline-block;
+            background: var(--secondary);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            margin-left: 8px;
+        }
+        
+        .tool-section {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .tool-section h3 {
+            color: var(--primary);
+            margin-top: 0;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        
+        .btn {
+            background: var(--secondary);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+        
+        .btn:hover {
+            background: var(--primary);
+        }
+        
+        .result {
+            margin-top: 15px;
+            padding: 15px;
+            background: #f0f8ff;
+            border-radius: 5px;
+            border-left: 4px solid var(--secondary);
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .stat-card {
+            background: white;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--dark);
+        }
+        
+        .quiz-question {
+            margin-bottom: 20px;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .quiz-options {
+            display: grid;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .quiz-option {
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .quiz-option:hover {
+            background: #e9ecef;
+        }
+        
+        .quiz-option.correct {
+            background: #d4edda;
+            border-left: 4px solid var(--success);
+        }
+        
+        .quiz-option.incorrect {
+            background: #f8d7da;
+            border-left: 4px solid var(--danger);
+        }
+        
+        .quiz-result {
+            margin-top: 20px;
+            padding: 15px;
+            text-align: center;
+            font-weight: bold;
+            border-radius: 8px;
+        }
+        
+        .success {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .warning {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        .ai-assistant {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .chat-container {
+            height: 300px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 15px;
+            background: #f9f9f9;
+        }
+        
+        .message {
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            max-width: 80%;
+        }
+        
+        .user-message {
+            background: #e3f2fd;
+            margin-left: auto;
+        }
+        
+        .assistant-message {
+            background: #f5f5f5;
+        }
+        
+        .chat-input {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .chat-input input {
+            flex: 1;
+        }
+        
+        .quiz-category {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            margin-bottom: 10px;
+        }
+        
+        .meal-card {
+            background: white;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            border-left: 4px solid var(--success);
+        }
+        
+        .meal-title {
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+        
+        .meal-time {
+            font-size: 0.9rem;
+            color: var(--accent);
+            margin-bottom: 10px;
+        }
+        
+        .media-card {
+            background: white;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .media-title {
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+        
+        .media-type {
+            display: inline-block;
+            background: var(--warning);
+            color: white;
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-size: 0.7rem;
+            margin-bottom: 8px;
+        }
+        
+        .progress-tracker {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px 0;
+        }
+        
+        .progress-step {
+            text-align: center;
+            flex: 1;
+            position: relative;
+        }
+        
+        .progress-step::after {
+            content: '';
+            position: absolute;
+            top: 15px;
+            right: -50%;
+            width: 100%;
+            height: 2px;
+            background: #ddd;
+            z-index: 1;
+        }
+        
+        .progress-step:last-child::after {
+            display: none;
+        }
+        
+        .step-circle {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #ddd;
+            margin: 0 auto 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .step-active {
+            background: var(--success);
+            color: white;
+        }
+        
+        .daily-overview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .overview-card {
+            background: white;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .overview-value {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+        
+        .overview-label {
+            font-size: 0.9rem;
+            color: var(--dark);
+        }
+        
+        .motivation-card {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+            text-align: center;
+        }
+        
+        .motivation-text {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .progress-circle {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: conic-gradient(var(--success) 0%, #e0e0e0 0%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            position: relative;
+        }
+        
+        .progress-circle-inner {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: var(--primary);
+        }
+        
+        .progress-percentage {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary);
+            text-align: center;
+            margin: 15px 0;
+        }
+        
+        /* Style dla kalendarzy */
+        .calendar-section {
+            margin-top: 30px;
+        }
+        
+        .calendar-tabs {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+        
+        .calendar-tab {
+            padding: 12px 20px;
+            background: #f5f5f5;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            border-radius: 5px 5px 0 0;
+            margin-right: 5px;
+        }
+        
+        .calendar-tab.active {
+            background: var(--secondary);
+            color: white;
+        }
+        
+        .calendar-tab:hover {
+            background: var(--accent);
+            color: white;
+        }
+        
+        .calendar-content {
+            display: none;
+        }
+        
+        .calendar-content.active {
+            display: block;
+        }
+        
+        .calendar-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        
+        .calendar-table th {
+            background: var(--primary);
+            color: white;
+            padding: 12px;
+            text-align: center;
+        }
+        
+        .calendar-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            vertical-align: top;
+            height: 120px;
+            width: 14.28%;
+        }
+        
+        .calendar-day {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: var(--primary);
+        }
+        
+        .calendar-event {
+            background: #e6f7ff;
+            padding: 5px;
+            margin: 3px 0;
+            border-radius: 3px;
+            font-size: 0.85rem;
+            border-left: 3px solid var(--secondary);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .calendar-event.training {
+            background: #e6f7ff;
+            border-left-color: var(--secondary);
+        }
+        
+        .calendar-event.school {
+            background: #fff2e6;
+            border-left-color: #ff9800;
+        }
+        
+        .calendar-event.personal {
+            background: #f0e6ff;
+            border-left-color: #9c27b0;
+        }
+        
+        .calendar-empty {
+            color: #999;
+            font-style: italic;
+        }
+        
+        .delete-event {
+            background: var(--danger);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .delete-event:hover {
+            background: #c82333;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .content {
+                padding: 15px;
+            }
+            
+            section {
+                padding: 15px;
+            }
+            
+            .time-slot {
+                min-width: 60px;
+            }
+            
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .message {
+                max-width: 90%;
+            }
+            
+            .progress-step::after {
+                right: -30%;
+            }
+            
+            .calendar-table td {
+                height: 80px;
+                padding: 5px;
+                font-size: 0.8rem;
+            }
+            
+            .calendar-event {
+                font-size: 0.7rem;
+                padding: 2px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>⚽ Kompletny System Treningowy Piłkarza</h1>
+            <p class="subtitle">Ultimate Edition v8.0 - Pełna Integracja</p>
+            <p class="tagline">Od planu treningowego po rozwój mentalny - wszystko w jednym miejscu</p>
+        </header>
+        
+        <div class="content">
+            <!-- ASYSTENT AI -->
+            <section>
+                <h2>🤖 Asystent AI - Dostosuj Swój Plan</h2>
+                
+                <div class="ai-assistant">
+                    <div class="chat-container" id="chatContainer">
+                        <div class="message assistant-message">
+                            <strong>Asystent:</strong> Cześć! Jestem Twoim asystentem treningowym. Możesz poprosić mnie o zmiany w planie treningowym, diecie, suplementacji, kalendarzach lub o cokolwiek innego związanego z Twoim rozwojem piłkarskim. Jak mogę Ci pomóc?
+                        </div>
+                    </div>
+                    
+                    <div class="chat-input">
+                        <input type="text" id="userInput" placeholder="Zapytaj asystenta o zmiany w planie lub kalendarzu...">
+                        <button class="btn" onclick="sendMessage()">Wyślij</button>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="planModification">Lub bezpośrednio zmodyfikuj plan:</label>
+                        <textarea id="planModification" rows="3" placeholder="Np. W poniedziałek o 16:00 dodaj trening siłowy do kalendarza treningów"></textarea>
+                        <button class="btn" onclick="applyModification()">Zastosuj zmianę</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- KALENDARZE -->
+            <section class="calendar-section">
+                <h2>📅 Kalendarze - Zarządzaj Swoim Czasem</h2>
+                
+                <div class="calendar-tabs">
+                    <button class="calendar-tab active" onclick="openCalendar('general')">Plan Tygodnia</button>
+                    <button class="calendar-tab" onclick="openCalendar('training')">Treningi Piłkarskie</button>
+                    <button class="calendar-tab" onclick="openCalendar('school')">Szkoła i Nauka</button>
+                </div>
+                
+                <!-- Kalendarz ogólny -->
+                <div id="general-calendar" class="calendar-content active">
+                    <h3>📅 Ogólny Plan Tygodnia</h3>
+                    <p>Tu możesz zarządzać wszystkimi swoimi aktywnościami w ciągu tygodnia.</p>
+                    
+                    <table class="calendar-table">
+                        <thead>
+                            <tr>
+                                <th>Poniedziałek</th>
+                                <th>Wtorek</th>
+                                <th>Środa</th>
+                                <th>Czwartek</th>
+                                <th>Piątek</th>
+                                <th>Sobota</th>
+                                <th>Niedziela</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td id="mon-general">
+                                    <div class="calendar-day">Poniedziałek</div>
+                                    <div class="calendar-empty" id="mon-empty-general">Brak wydarzeń</div>
+                                </td>
+                                <td id="tue-general">
+                                    <div class="calendar-day">Wtorek</div>
+                                    <div class="calendar-empty" id="tue-empty-general">Brak wydarzeń</div>
+                                </td>
+                                <td id="wed-general">
+                                    <div class="calendar-day">Środa</div>
+                                    <div class="calendar-empty" id="wed-empty-general">Brak wydarzeń</div>
+                                </td>
+                                <td id="thu-general">
+                                    <div class="calendar-day">Czwartek</div>
+                                    <div class="calendar-empty" id="thu-empty-general">Brak wydarzeń</div>
+                                </td>
+                                <td id="fri-general">
+                                    <div class="calendar-day">Piątek</div>
+                                    <div class="calendar-empty" id="fri-empty-general">Brak wydarzeń</div>
+                                </td>
+                                <td id="sat-general">
+                                    <div class="calendar-day">Sobota</div>
+                                    <div class="calendar-empty" id="sat-empty-general">Brak wydarzeń</div>
+                                </td>
+                                <td id="sun-general">
+                                    <div class="calendar-day">Niedziela</div>
+                                    <div class="calendar-empty" id="sun-empty-general">Brak wydarzeń</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- Kalendarz treningowy -->
+                <div id="training-calendar" class="calendar-content">
+                    <h3>⚽ Kalendarz Treningów Piłkarskich</h3>
+                    <p>Planuj swoje treningi, mecze i sesje regeneracyjne.</p>
+                    
+                    <table class="calendar-table">
+                        <thead>
+                            <tr>
+                                <th>Poniedziałek</th>
+                                <th>Wtorek</th>
+                                <th>Środa</th>
+                                <th>Czwartek</th>
+                                <th>Piątek</th>
+                                <th>Sobota</th>
+                                <th>Niedziela</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td id="mon-training">
+                                    <div class="calendar-day">Poniedziałek</div>
+                                    <div class="calendar-empty" id="mon-empty-training">Brak treningów</div>
+                                </td>
+                                <td id="tue-training">
+                                    <div class="calendar-day">Wtorek</div>
+                                    <div class="calendar-empty" id="tue-empty-training">Brak treningów</div>
+                                </td>
+                                <td id="wed-training">
+                                    <div class="calendar-day">Środa</div>
+                                    <div class="calendar-empty" id="wed-empty-training">Brak treningów</div>
+                                </td>
+                                <td id="thu-training">
+                                    <div class="calendar-day">Czwartek</div>
+                                    <div class="calendar-empty" id="thu-empty-training">Brak treningów</div>
+                                </td>
+                                <td id="fri-training">
+                                    <div class="calendar-day">Piątek</div>
+                                    <div class="calendar-empty" id="fri-empty-training">Brak treningów</div>
+                                </td>
+                                <td id="sat-training">
+                                    <div class="calendar-day">Sobota</div>
+                                    <div class="calendar-empty" id="sat-empty-training">Brak treningów</div>
+                                </td>
+                                <td id="sun-training">
+                                    <div class="calendar-day">Niedziela</div>
+                                    <div class="calendar-empty" id="sun-empty-training">Brak treningów</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- Kalendarz szkolny -->
+                <div id="school-calendar" class="calendar-content">
+                    <h3>📚 Kalendarz Szkolny</h3>
+                    <p>Śledź zadania domowe, testy i ważne szkolne wydarzenia.</p>
+                    
+                    <table class="calendar-table">
+                        <thead>
+                            <tr>
+                                <th>Poniedziałek</th>
+                                <th>Wtorek</th>
+                                <th>Środa</th>
+                                <th>Czwartek</th>
+                                <th>Piątek</th>
+                                <th>Sobota</th>
+                                <th>Niedziela</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td id="mon-school">
+                                    <div class="calendar-day">Poniedziałek</div>
+                                    <div class="calendar-empty" id="mon-empty-school">Brak zadań</div>
+                                </td>
+                                <td id="tue-school">
+                                    <div class="calendar-day">Wtorek</div>
+                                    <div class="calendar-empty" id="tue-empty-school">Brak zadań</div>
+                                </td>
+                                <td id="wed-school">
+                                    <div class="calendar-day">Środa</div>
+                                    <div class="calendar-empty" id="wed-empty-school">Brak zadań</div>
+                                </td>
+                                <td id="thu-school">
+                                    <div class="calendar-day">Czwartek</div>
+                                    <div class="calendar-empty" id="thu-empty-school">Brak zadań</div>
+                                </td>
+                                <td id="fri-school">
+                                    <div class="calendar-day">Piątek</div>
+                                    <div class="calendar-empty" id="fri-empty-school">Brak zadań</div>
+                                </td>
+                                <td id="sat-school">
+                                    <div class="calendar-day">Sobota</div>
+                                    <div class="calendar-empty" id="sat-empty-school">Brak zadań</div>
+                                </td>
+                                <td id="sun-school">
+                                    <div class="calendar-day">Niedziela</div>
+                                    <div class="calendar-empty" id="sun-empty-school">Brak zadań</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- PRZEGLĄD DNIA -->
+            <section>
+                <h2>📊 Przegląd Dnia - Postęp</h2>
+                
+                <div class="daily-overview">
+                    <div class="overview-card">
+                        <div class="overview-value" id="totalProgress">0%</div>
+                        <div class="overview-label">Ogólny Postęp</div>
+                    </div>
+                    <div class="overview-card">
+                        <div class="overview-value" id="completedTasks">0</div>
+                        <div class="overview-label">Ukończone Zadania</div>
+                    </div>
+                    <div class="overview-card">
+                        <div class="overview-value" id="remainingTasks">0</div>
+                        <div class="overview-label">Pozostałe Zadania</div>
+                    </div>
+                    <div class="overview-card">
+                        <div class="overview-value" id="productivityScore">0</div>
+                        <div class="overview-label">Wynik Produktywności</div>
+                    </div>
+                </div>
+                
+                <div class="progress-circle" id="mainProgressCircle">
+                    <div class="progress-circle-inner">
+                        <span id="circlePercentage">0%</span>
+                    </div>
+                </div>
+                
+                <div class="progress-percentage" id="progressText">Dzisiaj ukończyłeś 0% zadań. Tak trzymaj!</div>
+                
+                <div class="motivation-card">
+                    <div class="motivation-text" id="motivationMessage">Każdy dzień to nowa szansa stać się lepszym!</div>
+                    <button class="btn" style="background: white; color: var(--primary);" onclick="newMotivation()">Nowa motywacja</button>
+                </div>
+            </section>
+
+            <!-- CYTAT MOTYWACYJNY -->
+            <section>
+                <h2>💫 Cytat Motywacyjny Dnia</h2>
+                <div class="quote">
+                    <div id="dailyQuote">"Sukces nie jest przypadkiem. To ciężka praca, wytrwałość, nauka, studiowanie, poświęcenie i przede wszystkim miłość do tego, co robisz."</div>
+                    <div class="quote-author" id="quoteAuthor">- Pelé</div>
+                </div>
+                <button class="btn" onclick="newQuote()">Nowy cytat</button>
+            </section>
+
+            <!-- ZOPTYMALIZOWANY PLAN DNIA -->
+            <section>
+                <h2>📅 Zoptymalizowany Plan Dnia</h2>
+                
+                <div class="progress-tracker">
+                    <div class="progress-step">
+                        <div class="step-circle step-active">1</div>
+                        <div>Poranek</div>
+                    </div>
+                    <div class="progress-step">
+                        <div class="step-circle">2</div>
+                        <div>Szkoła</div>
+                    </div>
+                    <div class="progress-step">
+                        <div class="step-circle">3</div>
+                        <div>Trening</div>
+                    </div>
+                    <div class="progress-step">
+                        <div class="step-circle">4</div>
+                        <div>Regeneracja</div>
+                    </div>
+                </div>
+                
+                <div class="checklist">
+                    <div class="checklist-header">
+                        <h3>🌅 Poranek Wojownika (6:30 - 8:00)</h3>
+                        <div class="section-progress" id="morningProgress">0%</div>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="task-checkbox" data-section="morning">
+                        <span class="time-slot">6:30</span> Przebudzenie: 2 szklanki wody z cytryną + witamina D
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="task-checkbox" data-section="morning">
+                        <span class="time-slot">6:35</span> 5-min mobilność: Cat-Cow, World's Greatest Stretch
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="task-checkbox" data-section="morning">
+                        <span class="time-slot">6:40</span> Wizualizacja 3 min: Zobacz swój dzień sukcesu
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="task-checkbox" data-section="morning">
+                        <span class="time-slot">7:00</span> Śniadanie: Owsianka + białko + owoce + orzechy
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="task-checkbox" data-section="morning">
+                        <span class="time-slot">7:25</span> Spakowanie: Posiłki + strój treningowy + nauka
+                    </div>
+                </div>
+                
+                <div class="checklist">
+                    <div class="checklist-header">
+                        <h3>🏫 Szkoła + Optymalizacja (8:45 - 13:15)</h3>
+                        <div class="section-progress" id="schoolProgress">0%</div>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="task-checkbox" data-section="school">
+                        <span class="time-slot">10:30</span> Drugie śniadanie: Kanapki z kurczakiem + warzywa
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="task-checkbox" data-section="school">
+                        <span class="time-slot">Przerwy</span> 3-min mobilność co 2h + picie wody
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="task-checkbox" data-section="school">
+                        <span class="time-slot">12:30</span> Lekki lunch: Wrap z tuńczykiem + sałatka
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="task-checkbox" data-section="school">
+                        <span class="time-slot">13:15</span> Przekąska przedtreningowa: Banan + migdały
+                    </div>
+                </div>
+                
+                <div class="checklist">
+                    <div class="checklist-header">
+                        <h3>⚡ Trening Maksymalnej Wydajności (14:00 - 16:00)</h3>
+                        <div class="section-progress" id="trainingProgress">0%</div>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="task-checkbox" data-section="training">
+                        <span class="time-slot">13:55</span> Mentalna przełączka: 3 głębokie oddechy
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="task-checkbox" data-section="training">
+                        <span class="time-slot">14:00</span> 100% skupienie na jakości wykonania
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="task-checkbox" data-section="training">
+                        <span class="time-slot">Podczas</span> Pytanie trenera o feedback po każdym ćwiczeniu
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="task-checkbox" data-section="training">
+                        <span class="time-slot">15:45</span> Rozciąganie potreningowe + rolowanie
+                    </div>
+                </div>
+                
+                <div class="checklist">
+                    <div class="checklist-header">
+                        <h3>🚀 Popołudnie Produktywne (16:00 - 19:00)</h3>
+                        <div class="section-progress" id="afternoonProgress">0%</div>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="task-checkbox" data-section="afternoon">
+                        <span class="time-slot">16:15</span> Shake regeneracyjny: Białko + węgle + kreatyna
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="task-checkbox" data-section="afternoon">
+                        <span class="time-slot">16:30</span> Dodatkowy trening (wg planu dnia)
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="task-checkbox" data-section="afternoon">
+                        <span class="time-slot">17:30</span> Odrabianie lekcji (technika Pomodoro)
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="task-checkbox" data-section="afternoon">
+                        <span class="time-slot">18:30</span> Sauna/ice bath (jeśli dostępne)
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="task-checkbox" data-section="afternoon">
+                        <span class="time-slot">19:00</span> Kolacja: Łosoś + warzywa + kasza
+                    </div>
+                </div>
+                
+                <div class="checklist">
+                    <div class="checklist-header">
+                        <h3>🌙 Wieczór Regeneracyjny (19:00 - 22:30)</h3>
+                        <div class="section-progress" id="eveningProgress">0%</div>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="task-checkbox" data-section="evening">
+                        <span class="time-slot">20:00</span> Analiza treningu: 3 dobre rzeczy, 3 do poprawy
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="task-checkbox" data-section="evening">
+                        <span class="time-slot">20:30</span> Przygotowanie na następny dzień
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="task-checkbox" data-section="evening">
+                        <span class="time-slot">21:00</span> Rozluźnienie: Lekka mobilność + rozciąganie
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="task-checkbox" data-section="evening">
+                        <span class="time-slot">21:30</span> Przekąska na sen: Twaróg + migdały
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="task-checkbox" data-section="evening">
+                        <span class="time-slot">22:00</span> Wyłącz elektronikę, zacznij wyciszanie
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="task-checkbox" data-section="evening">
+                        <span class="time-slot">22:15</span> Medytacja/oddychanie 5-min
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" class="task-checkbox" data-section="evening">
+                        <span class="time-slot">22:30</span> Sen 8-9h (temperatura 18°C, ciemność)
+                    </div>
+                </div>
+            </section>
+
+            <!-- STATYSTYKI I ŚLEDZENIE POSTĘPÓW -->
+            <section>
+                <h2>📈 Statystyki i Śledzenie Postępów</h2>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-value" id="sprintValue">4.2s</div>
+                        <div class="stat-label">Sprint 30m</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="jumpValue">48cm</div>
+                        <div class="stat-label">Wyskok CMJ</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="squatValue">120kg</div>
+                        <div class="stat-label">1RM Przysiad</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="goalsValue">8</div>
+                        <div class="stat-label">Gole w sezonie</div>
+                    </div>
+                </div>
+                
+                <div class="tool-section">
+                    <h3>Zaktualizuj swoje statystyki</h3>
+                    
+                    <div class="form-group">
+                        <label for="sprintTime">Czas sprintu 30m (s):</label>
+                        <input type="number" step="0.1" id="sprintTime" placeholder="np. 4.2">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="jumpHeight">Wyskok CMJ (cm):</label>
+                        <input type="number" id="jumpHeight" placeholder="np. 48">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="squatWeight">1RM Przysiad (kg):</label>
+                        <input type="number" id="squatWeight" placeholder="np. 120">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="goalsScored">Gole w sezonie:</label>
+                        <input type="number" id="goalsScored" placeholder="np. 8">
+                    </div>
+                    
+                    <button class="btn" onclick="updateStats()">Zaktualizuj Statystyki</button>
+                </div>
+                
+                <div class="tool-section">
+                    <h3>Dziennik Treningowy</h3>
+                    <div class="form-group">
+                        <label for="trainingDate">Data:</label>
+                        <input type="date" id="trainingDate">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="trainingType">Rodzaj treningu:</label>
+                        <select id="trainingType">
+                            <option value="siła">Siła</option>
+                            <option value="szybkość">Szybkość</option>
+                            <option value="wytrzymałość">Wytrzymałość</option>
+                            <option value="technika">Technika</option>
+                            <option value="mecz">Mecz</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="trainingNotes">Notatki:</label>
+                        <textarea id="trainingNotes" rows="3" placeholder="Jak się czułeś? Co poszło dobrze? Co do poprawy?"></textarea>
+                    </div>
+                    
+                    <button class="btn" onclick="addTrainingLog()">Dodaj wpis</button>
+                    
+                    <div id="trainingLog" class="result">
+                        <h4>Ostatnie wpisy:</h4>
+                        <div id="logEntries"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- MENTALNOŚĆ WOJOWNIKA -->
+            <section>
+                <h2>🧠 Mentalność Wojownika</h2>
+                
+                <div class="grid">
+                    <div class="card">
+                        <h3>🎯 Techniki Wizualizacji</h3>
+                        <ul>
+                            <li><strong>Wizualizacja sukcesu:</strong> Przed snem wyobrażaj sobie idealne wykonanie</li>
+                            <li><strong>Mentalny mecz:</strong> Odtwarzaj w głowie całe akcje z meczu</li>
+                            <li><strong>Pozytywne afirmacje:</strong> Powtarzaj "Jestem silny, szybki, skuteczny"</li>
+                            <li><strong>Pokonywanie trudności:</strong> Wizualizuj jak pokonujesz przeszkody</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>💪 Pokonywanie Kryzysów</h3>
+                        <ul>
+                            <li><strong>Kontuzja = szansa:</strong> Wykorzystaj czas na rozwój innych umiejętności</li>
+                            <li><strong>Porównuj się tylko z sobą:</strong> Śledź swój progres, nie innych</li>
+                            <li><strong>Dzień po dniu:</strong> Skup się na małych krokach, nie na wielkim celu</li>
+                            <li><strong>Akceptacja porażek:</strong> Każda porażka to lekcja na przyszłość</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>🔥 Rutyna Mentalna</h3>
+                        <ul>
+                            <li><strong>Poranna intencja:</strong> Zastanów się jaki chcesz mieć dzień</li>
+                            <li><strong>Dziennik wdzięczności:</strong> Zapisz 3 rzeczy za które jesteś wdzięczny</li>
+                            <li><strong>Oddychanie 4-7-8:</strong> 4s wdech, 7s wstrzymanie, 8s wydech</li>
+                            <li><strong>Wieczorna refleksja:</strong> Co poszło dobrze? Czego się nauczyłem?</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ROZBUDOWANY QUIZ -->
+            <section>
+                <h2>🧠 Mega Quiz Piłkarski - Sprawdź Swoją Wiedzę</h2>
+                
+                <div class="tool-section">
+                    <h3>Wybierz kategorię:</h3>
+                    <div class="grid">
+                        <button class="btn" onclick="selectCategory('tactics')">Taktyka</button>
+                        <button class="btn" onclick="selectCategory('technique')">Technika</button>
+                        <button class="btn" onclick="selectCategory('fitness')">Przygotowanie fizyczne</button>
+                        <button class="btn" onclick="selectCategory('nutrition')">Żywienie</button>
+                        <button class="btn" onclick="selectCategory('history')">Historia i ciekawostki</button>
+                        <button class="btn" onclick="selectCategory('rules')">Przepisy gry</button>
+                    </div>
+                    
+                    <div id="quizArea" style="display: none;">
+                        <div class="quiz-question">
+                            <div class="quiz-category" id="currentCategory"></div>
+                            <h3 id="questionText"></h3>
+                            <div class="quiz-options" id="optionsContainer">
+                                <!-- Opcje będą dodawane dynamicznie -->
+                            </div>
+                        </div>
+                        
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <div class="stat-value" id="correctCount">0</div>
+                                <div class="stat-label">Poprawne</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-value" id="incorrectCount">0</div>
+                                <div class="stat-label">Błędne</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-value" id="totalCount">0</div>
+                                <div class="stat-label">Łącznie</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-value" id="accuracyRate">0%</div>
+                                <div class="stat-label">Skuteczność</div>
+                            </div>
+                        </div>
+                        
+                        <button class="btn" onclick="nextQuestion()" id="nextButton" style="display: none;">Następne pytanie</button>
+                        <button class="btn" onclick="resetQuiz()" id="resetButton" style="display: none;">Zacznij od nowa</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PRZYCISK EKSPORTU -->
+            <div style="text-align: center; margin-top: 30px;">
+                <button class="download-btn" onclick="exportToPDF()">📥 Eksportuj do PDF</button>
+            </div>
+        </div>
+        
+        <footer>
+            <p>© 2023 Kompletny System Treningowy Piłkarza | Ultimate Complete Edition</p>
+            <p style="margin-top: 10px; font-size: 0.9rem; opacity: 0.8;">Twoja droga do mistrzostwa zaczyna się tutaj. Działaj!</p>
+        </footer>
+    </div>
+
+    <script>
+        // Śledzenie postępu checklisty
+        document.addEventListener('DOMContentLoaded', function() {
+            const checkboxes = document.querySelectorAll('.task-checkbox');
+            
+            checkboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', updateProgress);
+            });
+            
+            // Inicjalne wywołanie
+            updateProgress();
+            loadCalendars();
+        });
+
+        function updateProgress() {
+            // Oblicz ogólny postęp
+            const allCheckboxes = document.querySelectorAll('.task-checkbox');
+            const checked = document.querySelectorAll('.task-checkbox:checked').length;
+            const total = allCheckboxes.length;
+            const progress = total > 0 ? (checked / total) * 100 : 0;
+            
+            // Zaktualizuj ogólny postęp
+            document.getElementById('totalProgress').textContent = `${Math.round(progress)}%`;
+            document.getElementById('completedTasks').textContent = checked;
+            document.getElementById('remainingTasks').textContent = total - checked;
+            document.getElementById('productivityScore').textContent = Math.round(progress / 10);
+            document.getElementById('circlePercentage').textContent = `${Math.round(progress)}%`;
+            document.getElementById('progressText').textContent = getProgressMessage(progress);
+            
+            // Zaktualizuj okrągły wskaźnik postępu
+            const progressCircle = document.getElementById('mainProgressCircle');
+            progressCircle.style.background = `conic-gradient(var(--success) ${progress}%, #e0e0e0 ${progress}%)`;
+            
+            // Oblicz postęp dla każdej sekcji
+            const sections = ['morning', 'school', 'training', 'afternoon', 'evening'];
+            sections.forEach(section => {
+                const sectionCheckboxes = document.querySelectorAll(`.task-checkbox[data-section="${section}"]`);
+                const checkedInSection = document.querySelectorAll(`.task-checkbox[data-section="${section}"]:checked`).length;
+                const totalInSection = sectionCheckboxes.length;
+                const sectionProgress = totalInSection > 0 ? (checkedInSection / totalInSection) * 100 : 0;
+                
+                document.getElementById(`${section}Progress`).textContent = `${Math.round(sectionProgress)}%`;
+            });
+        }
+
+        function getProgressMessage(progress) {
+            if (progress === 0) return "Zacznij dzień od pierwszego zadania!";
+            if (progress < 25) return "Dobry początek! Tak trzymaj!";
+            if (progress < 50) return "Idziesz w dobrym kierunku!";
+            if (progress < 75) return "Ponad połowa za tobą! Super!";
+            if (progress < 100) return "Prawie u celu! Ostatni wysiłek!";
+            return "Perfekcyjnie! Ukończyłeś wszystkie zadania! Jesteś mistrzem!";
+        }
+
+        // Asystent AI z obsługą kalendarzy
+        function sendMessage() {
+            const userInput = document.getElementById('userInput');
+            const chatContainer = document.getElementById('chatContainer');
+            const message = userInput.value.trim();
+            
+            if (!message) return;
+            
+            // Dodaj wiadomość użytkownika
+            const userMessage = document.createElement('div');
+            userMessage.className = 'message user-message';
+            userMessage.innerHTML = `<strong>Ty:</strong> ${message}`;
+            chatContainer.appendChild(userMessage);
+            
+            // Wyczyść pole wejściowe
+            userInput.value = '';
+            
+            // Symuluj odpowiedź asystenta po krótkim opóźnieniu
+            setTimeout(() => {
+                const response = generateAIResponse(message);
+                const assistantMessage = document.createElement('div');
+                assistantMessage.className = 'message assistant-message';
+                assistantMessage.innerHTML = `<strong>Asystent:</strong> ${response}`;
+                chatContainer.appendChild(assistantMessage);
+                
+                // Przewiń do dołu
+                chatContainer.scrollTop = chatContainer.scrollHeight;
+            }, 1000);
+        }
+
+        function applyModification() {
+            const modification = document.getElementById('planModification').value.trim();
+            if (!modification) return;
+            
+            const chatContainer = document.getElementById('chatContainer');
+            
+            // Dodaj wiadomość użytkownika
+            const userMessage = document.createElement('div');
+            userMessage.className = 'message user-message';
+            userMessage.innerHTML = `<strong>Ty:</strong> ${modification}`;
+            chatContainer.appendChild(userMessage);
+            
+            // Wyczyść pole
+            document.getElementById('planModification').value = '';
+            
+            // Symuluj odpowiedź asystenta
+            setTimeout(() => {
+                const response = processModification(modification);
+                const assistantMessage = document.createElement('div');
+                assistantMessage.className = 'message assistant-message';
+                assistantMessage.innerHTML = `<strong>Asystent:</strong> ${response}`;
+                chatContainer.appendChild(assistantMessage);
+                
+                // Przewiń do dołu
+                chatContainer.scrollTop = chatContainer.scrollHeight;
+            }, 1000);
+        }
+
+        function generateAIResponse(message) {
+            const lowerMessage = message.toLowerCase();
+            
+            // Sprawdź czy wiadomość dotyczy kalendarza
+            if (lowerMessage.includes('kalendarz') || lowerMessage.includes('dodaj') || 
+                lowerMessage.includes('plan') || lowerMessage.includes('trening') || 
+                lowerMessage.includes('szkoła') || lowerMessage.includes('zadanie')) {
+                return processCalendarCommand(message);
+            } else if (lowerMessage.includes('trening') && lowerMessage.includes('sił')) {
+                return "Rozumiem, że chcesz zmodyfikować trening siłowy. Mogę pomóc Ci dostosować ćwiczenia, objętość lub intensywność. Czy możesz sprecyzować, co dokładnie chciałbyś zmienić?";
+            } else if (lowerMessage.includes('dieta') || lowerMessage.includes('żywienie')) {
+                return "Widzę, że interesuje Cię kwestia żywienia. Mogę pomóc w dostosowaniu planu żywieniowego do Twoich celów. Czy chodzi o redukcję, masę czy utrzymanie wagi?";
+            } else if (lowerMessage.includes('suplement')) {
+                return "Suplementacja to ważny element przygotowania. Mogę zasugerować zmiany w suplementacji w zależności od Twoich potrzeb. Jakie suplementy aktualnie stosujesz?";
+            } else if (lowerMessage.includes('regeneracja')) {
+                return "Regeneracja jest kluczowa dla postępów. Mogę pomóc w optymalizacji Twojego planu regeneracji. Czy masz konkretne problemy z regeneracją?";
+            } else if (lowerMessage.includes('zmień') || lowerMessage.includes('modyfikuj')) {
+                return "Użyj pola 'Lub bezpośrednio zmodyfikuj plan', aby wprowadzić konkretne zmiany, a ja je zastosuję.";
+            } else {
+                return "Rozumiem Twoją prośbę. Aby wprowadzić konkretne zmiany w planie, użyj pola 'Lub bezpośrednio zmodyfikuj plan' poniżej. Możesz też zadać mi bardziej szczegółowe pytanie.";
+            }
+        }
+
+        function processCalendarCommand(message) {
+            const lowerMessage = message.toLowerCase();
+            let response = "Zrozumiałem Twoją prośbę dotyczącą kalendarza. ";
+            
+            // Sprawdź który kalendarz
+            let calendarType = 'general';
+            if (lowerMessage.includes('trening') || lowerMessage.includes('piłka')) {
+                calendarType = 'training';
+                response += "Dodaję wydarzenie do kalendarza treningów. ";
+            } else if (lowerMessage.includes('szkoła') || lowerMessage.includes('nauka') || lowerMessage.includes('zadanie')) {
+                calendarType = 'school';
+                response += "Dodaję wydarzenie do kalendarza szkolnego. ";
+            } else {
+                response += "Dodaję wydarzenie do ogólnego planu tygodnia. ";
+            }
+            
+            // Sprawdź dzień tygodnia
+            const days = {
+                'poniedziałek': 'mon',
+                'poniedziałku': 'mon',
+                'wtorek': 'tue', 
+                'wtorku': 'tue',
+                'środa': 'wed',
+                'środę': 'wed',
+                'czwartek': 'thu',
+                'czwartku': 'thu',
+                'piątek': 'fri',
+                'piątku': 'fri',
+                'sobota': 'sat',
+                'sobotę': 'sat',
+                'niedziela': 'sun',
+                'niedzielę': 'sun'
+            };
+            
+            let day = 'mon';
+            for (const [dayName, dayCode] of Object.entries(days)) {
+                if (lowerMessage.includes(dayName)) {
+                    day = dayCode;
+                    response += `Wybrany dzień: ${dayName}. `;
+                    break;
+                }
+            }
+            
+            // Wyodrębnij czas i opis
+            let time = '';
+            let description = '';
+            
+            // Szukanie czasu (np. "o 16:00", "na 14:30")
+            const timeMatch = message.match(/(\d{1,2}:\d{2})/);
+            if (timeMatch) {
+                time = timeMatch[1];
+                response += `Czas: ${time}. `;
+            }
+            
+            // Wyodrębnianie opisu (usuń znane fragmenty)
+            description = message
+                .replace(/kalendarz|dodaj|plan|trening|szkoła|zadanie|na|o|wtorek|poniedziałek|środa|czwartek|piątek|sobota|niedziela|\d{1,2}:\d{2}/gi, '')
+                .trim();
+            
+            if (description) {
+                response += `Opis: ${description}. `;
+            } else {
+                description = "Nowe wydarzenie";
+            }
+            
+            // Dodaj wydarzenie do kalendarza
+            addCalendarEvent(calendarType, day, time, description);
+            
+            response += "Wydarzenie zostało dodane do kalendarza. Możesz je zobaczyć w odpowiedniej zakładce.";
+            return response;
+        }
+
+        function processModification(modification) {
+            // W prawdziwej aplikacji tutaj byłaby logika rzeczywistej modyfikacji planu
+            // Na potrzeby demonstracji zwracamy tylko potwierdzenie
+            return "Zrozumiałem Twoją prośbę: '" + modification + "'. W prawdziwej wersji aplikacji zmiany zostałyby zastosowane do Twojego planu. Możesz kontynuować wprowadzanie kolejnych modyfikacji.";
+        }
+
+        // Zarządzanie kalendarzami
+        function openCalendar(calendarName) {
+            // Ukryj wszystkie kalendarze
+            document.querySelectorAll('.calendar-content').forEach(cal => {
+                cal.classList.remove('active');
+            });
+            
+            // Usuń aktywną klasę ze wszystkich zakładek
+            document.querySelectorAll('.calendar-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Pokaż wybrany kalendarz
+            document.getElementById(`${calendarName}-calendar`).classList.add('active');
+            
+            // Ustaw aktywną zakładkę
+            event.target.classList.add('active');
+        }
+
+        function loadCalendars() {
+            // Wczytaj dane kalendarzy z localStorage lub użyj domyślnych
+            const calendars = ['general', 'training', 'school'];
+            const days = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+            
+            calendars.forEach(calendar => {
+                days.forEach(day => {
+                    const events = getCalendarEvents(calendar, day);
+                    displayCalendarEvents(calendar, day, events);
+                });
+            });
+        }
+
+        function getCalendarEvents(calendarType, day) {
+            // W prawdziwej aplikacji dane byłyby pobierane z localStorage lub bazy danych
+            // Tutaj symulujemy pobieranie danych
+            const key = `${calendarType}-${day}-events`;
+            const stored = localStorage.getItem(key);
+            
+            if (stored) {
+                return JSON.parse(stored);
+            }
+            
+            // Domyślne wydarzenia dla przykładu
+            const defaults = {
+                'training-mon': [{time: '16:00', text: 'Trening siłowy - nogi'}],
+                'training-wed': [{time: '16:00', text: 'Trening szybkości'}],
+                'training-fri': [{time: '16:00', text: 'Trening techniczny'}],
+                'school-tue': [{time: '', text: 'Matematyka - zadanie domowe'}],
+                'school-thu': [{time: '', text: 'Historia - przygotowanie do testu'}],
+                'general-sat': [{time: '10:00', text: 'Mecz ligowy'}]
+            };
+            
+            const defaultKey = `${calendarType}-${day}`;
+            return defaults[defaultKey] || [];
+        }
+
+        function displayCalendarEvents(calendarType, day, events) {
+            const container = document.getElementById(`${day}-${calendarType}`);
+            const emptyIndicator = document.getElementById(`${day}-empty-${calendarType}`);
+            
+            // Wyczyść kontener
+            container.innerHTML = `<div class="calendar-day">${getDayName(day)}</div>`;
+            
+            if (events.length === 0) {
+                emptyIndicator.style.display = 'block';
+                container.appendChild(emptyIndicator);
+            } else {
+                emptyIndicator.style.display = 'none';
+                
+                events.forEach((event, index) => {
+                    const eventElement = document.createElement('div');
+                    eventElement.className = `calendar-event ${calendarType}`;
+                    
+                    let eventText = event.text;
+                    if (event.time) {
+                        eventText = `<strong>${event.time}</strong> - ${eventText}`;
+                    }
+                    
+                    eventElement.innerHTML = `
+                        <span>${eventText}</span>
+                        <button class="delete-event" onclick="deleteCalendarEvent('${calendarType}', '${day}', ${index})">×</button>
+                    `;
+                    container.appendChild(eventElement);
+                });
+            }
+        }
+
+        function addCalendarEvent(calendarType, day, time, text) {
+            // Pobierz istniejące wydarzenia
+            const events = getCalendarEvents(calendarType, day);
+            
+            // Dodaj nowe wydarzenie
+            events.push({ time, text });
+            
+            // Zapisz w localStorage
+            const key = `${calendarType}-${day}-events`;
+            localStorage.setItem(key, JSON.stringify(events));
+            
+            // Odśwież wyświetlanie
+            displayCalendarEvents(calendarType, day, events);
+        }
+
+        function deleteCalendarEvent(calendarType, day, index) {
+            // Pobierz istniejące wydarzenia
+            const events = getCalendarEvents(calendarType, day);
+            
+            // Usuń wydarzenie
+            events.splice(index, 1);
+            
+            // Zapisz w localStorage
+            const key = `${calendarType}-${day}-events`;
+            localStorage.setItem(key, JSON.stringify(events));
+            
+            // Odśwież wyświetlanie
+            displayCalendarEvents(calendarType, day, events);
+        }
+
+        function getDayName(dayCode) {
+            const names = {
+                'mon': 'Poniedziałek',
+                'tue': 'Wtorek',
+                'wed': 'Środa',
+                'thu': 'Czwartek',
+                'fri': 'Piątek',
+                'sat': 'Sobota',
+                'sun': 'Niedziela'
+            };
+            return names[dayCode] || dayCode;
+        }
+
+        // Cytaty motywacyjne
+        const quotes = [
+            {
+                text: "Sukces nie jest przypadkiem. To ciężka praca, wytrwałość, nauka, studiowanie, poświęcenie i przede wszystkim miłość do tego, co robisz.",
+                author: "Pelé"
+            },
+            {
+                text: "Talent bez ciężkiej pracy to nic. Jeśli masz talent, a inni też go mają, to ciężka praca czyni różnicę.",
+                author: "Cristiano Ronaldo"
+            },
+            {
+                text: "Nie myślę, że wszystko jest niemożliwe. Zawsze myślę, że mogę poprawić się we wszystkim.",
+                author: "Lionel Messi"
+            }
+        ];
+
+        const motivations = [
+            "Dzisiaj jest Twój dzień! Pokonaj swoje słabości!",
+            "Każdy mistrz kiedyś zaczynał jako początkujący.",
+            "Twoja determinacja dzisiaj zdefiniuje Twoje jutro.",
+            "Nie liczy się wielkość przeciwnika, ale wielkość Twojej woli walki.",
+            "Im ciężej trenujesz, tym trudniej się poddajesz."
+        ];
+
+        function newQuote() {
+            const randomIndex = Math.floor(Math.random() * quotes.length);
+            const quote = quotes[randomIndex];
+            document.getElementById('dailyQuote').textContent = `"${quote.text}"`;
+            document.getElementById('quoteAuthor').textContent = `- ${quote.author}`;
+        }
+
+        function newMotivation() {
+            const randomIndex = Math.floor(Math.random() * motivations.length);
+            document.getElementById('motivationMessage').textContent = motivations[randomIndex];
+        }
+
+        // Statystyki i dziennik treningowy
+        function updateStats() {
+            const sprintTime = document.getElementById('sprintTime').value;
+            const jumpHeight = document.getElementById('jumpHeight').value;
+            const squatWeight = document.getElementById('squatWeight').value;
+            const goalsScored = document.getElementById('goalsScored').value;
+            
+            if (sprintTime) {
+                document.getElementById('sprintValue').textContent = sprintTime + 's';
+                localStorage.setItem('sprintValue', sprintTime + 's');
+            }
+            
+            if (jumpHeight) {
+                document.getElementById('jumpValue').textContent = jumpHeight + 'cm';
+                localStorage.setItem('jumpValue', jumpHeight + 'cm');
+            }
+            
+            if (squatWeight) {
+                document.getElementById('squatValue').textContent = squatWeight + 'kg';
+                localStorage.setItem('squatValue', squatWeight + 'kg');
+            }
+            
+            if (goalsScored) {
+                document.getElementById('goalsValue').textContent = goalsScored;
+                localStorage.setItem('goalsValue', goalsScored);
+            }
+            
+            if (sprintTime || jumpHeight || squatWeight || goalsScored) {
+                alert('Statystyki zaktualizowane!');
+            }
+        }
+
+        function addTrainingLog() {
+            const date = document.getElementById('trainingDate').value;
+            const type = document.getElementById('trainingType').value;
+            const notes = document.getElementById('trainingNotes').value;
+            
+            if (!date || !notes) {
+                alert('Proszę wypełnić datę i notatki');
+                return;
+            }
+            
+            const logEntries = document.getElementById('logEntries');
+            const entry = document.createElement('div');
+            entry.style.padding = '10px';
+            entry.style.borderBottom = '1px solid #ddd';
+            entry.innerHTML = `<strong>${date}</strong> - ${type}<br>${notes}`;
+            
+            logEntries.prepend(entry); // Dodaj na początku
+            
+            // Wyczyść pola
+            document.getElementById('trainingDate').value = '';
+            document.getElementById('trainingNotes').value = '';
+            
+            alert('Dodano wpis do dziennika!');
+        }
+
+        // Rozbudowany quiz
+        const quizQuestions = {
+            tactics: [
+                {
+                    question: "Który system gry charakteryzuje się ustawieniem 4-3-3 z fałszywą dziewiątką?",
+                    options: ["System Guardioli", "System Cruyffa", "System Sacchiego", "System Cattenaccio"],
+                    correct: 0
+                },
+                {
+                    question: "Co oznacza skrót 'Gegenpressing' w taktyce piłkarskiej?",
+                    options: ["Kontratak", "Pressing wysoki", "Kontrpressing", "Gra pozycyjna"],
+                    correct: 2
+                }
+            ],
+            technique: [
+                {
+                    question: "Która technika strzału pozwala na największą siłę i precyzję?",
+                    options: ["Strzał instepem (czubkiem stopy)", "Strzał wewnętrzną częścią stopy", "Strzał z woleja", "Strzał piętą"],
+                    correct: 0
+                },
+                {
+                    question: "Co to jest 'Cruyff turn'?",
+                    options: ["Zwód polegający na nagłym obrocie z piłką", "Sposób podania piłki", "Technika strzału", "Sposób dryblingu"],
+                    correct: 0
+                }
+            ],
+            fitness: [
+                {
+                    question: "Jaki jest optymalny czas regeneracji po intensywnym treningu siłowym?",
+                    options: ["48-72 godziny", "12-24 godziny", "6-12 godzin", "Ponad 96 godzin"],
+                    correct: 0
+                },
+                {
+                    question: "Które ćwiczenie najlepiej rozwija eksplozywność piłkarza?",
+                    options: ["Przysiady ze sztangą", "Plyometria", "Biegi długodystansowe", "Martwy ciąg"],
+                    correct: 1
+                }
+            ],
+            nutrition: [
+                {
+                    question: "Ile gramów białka na kg masy ciała potrzebuje piłkarz?",
+                    options: ["1.6-2.2 g/kg", "0.8-1.0 g/kg", "2.5-3.0 g/kg", "3.5-4.0 g/kg"],
+                    correct: 0
+                },
+                {
+                    question: "Który posiłek jest najważniejszy dla regeneracji po treningu?",
+                    options: ["Posiłek w ciągu 30 minut po treningu", "Śniadanie następnego dnia", "Kolacja", "Posiłek 2 godziny po treningu"],
+                    correct: 0
+                }
+            ],
+            history: [
+                {
+                    question: "Który zawodnik zdobył najwięcej Złotych Piłek?",
+                    options: ["Lionel Messi", "Cristiano Ronaldo", "Johan Cruyff", "Michel Platini"],
+                    correct: 0
+                },
+                {
+                    question: "Która drużyna wygrała pierwszy Puchar Mistrzów (obecna Liga Mistrzów)?",
+                    options: ["Real Madryt", "Benfica Lizbona", "AC Milan", "FC Barcelona"],
+                    correct: 0
+                }
+            ],
+            rules: [
+                {
+                    question: "Kiedy sędzia powinien przerwać grę z powodu spalonej pozycji?",
+                    options: ["Gdy zawodnik w spalonej pozycji aktywnie uczestniczy w grze", "Gdy zawodnik znajduje się w spalonej pozycji", "Gdy piłka jest podawana do zawodnika w spalonej pozycji", "Gdy zawodnik w spalonej pozycji znajduje się na swojej połowie"],
+                    correct: 0
+                },
+                {
+                    question: "Ile kartek żółtych powoduje automatyczną czerwoną kartkę?",
+                    options: ["Dwie w tym samym meczu", "Trzy w sezonie", "Pięć w sezonie", "Żadna z powyższych"],
+                    correct: 0
+                }
+            ]
+        };
+
+        let currentCategory = '';
+        let currentQuestionIndex = 0;
+        let correctAnswers = 0;
+        let incorrectAnswers = 0;
+        let usedQuestions = [];
+
+        function selectCategory(category) {
+            currentCategory = category;
+            currentQuestionIndex = 0;
+            usedQuestions = [];
+            
+            document.getElementById('quizArea').style.display = 'block';
+            document.getElementById('currentCategory').textContent = getCategoryName(category);
+            
+            // Resetuj statystyki
+            correctAnswers = 0;
+            incorrectAnswers = 0;
+            updateQuizStats();
+            
+            loadQuestion();
+        }
+
+        function getCategoryName(category) {
+            const names = {
+                'tactics': 'Taktyka',
+                'technique': 'Technika',
+                'fitness': 'Przygotowanie fizyczne',
+                'nutrition': 'Żywienie',
+                'history': 'Historia i ciekawostki',
+                'rules': 'Przepisy gry'
+            };
+            return names[category] || category;
+        }
+
+        function loadQuestion() {
+            const questions = quizQuestions[currentCategory];
+            
+            // Jeśli wykorzystaliśmy wszystkie pytania, zacznij od nowa
+            if (usedQuestions.length >= questions.length) {
+                usedQuestions = [];
+            }
+            
+            // Wybierz losowe pytanie, którego jeszcze nie było
+            let randomIndex;
+            do {
+                randomIndex = Math.floor(Math.random() * questions.length);
+            } while (usedQuestions.includes(randomIndex));
+            
+            usedQuestions.push(randomIndex);
+            currentQuestionIndex = randomIndex;
+            
+            const question = questions[randomIndex];
+            
+            document.getElementById('questionText').textContent = question.question;
+            
+            const optionsContainer = document.getElementById('optionsContainer');
+            optionsContainer.innerHTML = '';
+            
+            question.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'quiz-option';
+                optionElement.textContent = option;
+                optionElement.onclick = () => checkAnswer(index, question.correct);
+                optionsContainer.appendChild(optionElement);
+            });
+            
+            document.getElementById('nextButton').style.display = 'none';
+            document.getElementById('resetButton').style.display = 'none';
+        }
+
+        function checkAnswer(selectedIndex, correctIndex) {
+            const options = document.querySelectorAll('.quiz-option');
+            
+            // Zaznacz poprawną i błędną odpowiedź
+            options.forEach((option, index) => {
+                if (index === correctIndex) {
+                    option.classList.add('correct');
+                } else if (index === selectedIndex && index !== correctIndex) {
+                    option.classList.add('incorrect');
+                }
+                option.style.pointerEvents = 'none';
+            });
+            
+            // Zaktualizuj statystyki
+            if (selectedIndex === correctIndex) {
+                correctAnswers++;
+            } else {
+                incorrectAnswers++;
+            }
+            
+            updateQuizStats();
+            
+            // Pokaż przycisk następnego pytania
+            document.getElementById('nextButton').style.display = 'inline-block';
+            document.getElementById('resetButton').style.display = 'inline-block';
+        }
+
+        function nextQuestion() {
+            loadQuestion();
+        }
+
+        function resetQuiz() {
+            correctAnswers = 0;
+            incorrectAnswers = 0;
+            updateQuizStats();
+            loadQuestion();
+        }
+
+        function updateQuizStats() {
+            document.getElementById('correctCount').textContent = correctAnswers;
+            document.getElementById('incorrectCount').textContent = incorrectAnswers;
+            document.getElementById('totalCount').textContent = correctAnswers + incorrectAnswers;
+            
+            const total = correctAnswers + incorrectAnswers;
+            const accuracy = total > 0 ? Math.round((correctAnswers / total) * 100) : 0;
+            document.getElementById('accuracyRate').textContent = `${accuracy}%`;
+        }
+
+        // Eksport do PDF (symulacja)
+        function exportToPDF() {
+            alert('Funkcja eksportu do PDF będzie dostępna w pełnej wersji. Na razie możesz wydrukować stronę (Ctrl+P) i wybrać "Zapisz jako PDF".');
+        }
+
+        // Pozwól na wysyłanie wiadomości za pomocą Enter
+        document.getElementById('userInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        // Inicjalizacja - wczytaj zapisane statystyki
+        document.addEventListener('DOMContentLoaded', function() {
+            // Wczytaj zapisane statystyki
+            const savedSprint = localStorage.getItem('sprintValue');
+            const savedJump = localStorage.getItem('jumpValue');
+            const savedSquat = localStorage.getItem('squatValue');
+            const savedGoals = localStorage.getItem('goalsValue');
+            
+            if (savedSprint) document.getElementById('sprintValue').textContent = savedSprint;
+            if (savedJump) document.getElementById('jumpValue').textContent = savedJump;
+            if (savedSquat) document.getElementById('squatValue').textContent = savedSquat;
+            if (savedGoals) document.getElementById('goalsValue').textContent = savedGoals;
+            
+            updateProgress();
+            newQuote();
+            newMotivation();
+        });
+    </script>
+</body>
+</html>
